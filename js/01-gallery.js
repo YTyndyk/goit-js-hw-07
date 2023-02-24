@@ -1,13 +1,12 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
-
 const gelleryRef = document.querySelector(".gallery");
-
 const cardMarkup = createGalleryItems(galleryItems);
 
 gelleryRef.addEventListener("click", (e) => {
 	e.preventDefault();
 	console.log("Натиснули на картинку!");
+	instance.show();
 });
 
 function createGalleryItems(galleryItems) {
@@ -30,7 +29,5 @@ function createGalleryItems(galleryItems) {
 gelleryRef.insertAdjacentHTML("beforeend", cardMarkup);
 
 const instance = basicLightbox.create(`
-    <img src="" width="800" height="600">
+    <img src="https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg" width="800" height="600">
 `);
-
-instance.show();

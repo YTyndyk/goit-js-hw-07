@@ -2,9 +2,13 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const gelleryRef = document.querySelector(".gallery");
+
 const cardMarkup = createGalleryItems(galleryItems);
 
-gelleryRef.insertAdjacentHTML("beforeend", cardMarkup);
+gelleryRef.addEventListener("click", (e) => {
+	e.preventDefault();
+	console.log("Натиснули на картинку!");
+});
 
 function createGalleryItems(galleryItems) {
 	return galleryItems
@@ -23,3 +27,10 @@ function createGalleryItems(galleryItems) {
 		})
 		.join("");
 }
+gelleryRef.insertAdjacentHTML("beforeend", cardMarkup);
+
+const instance = basicLightbox.create(`
+    <img src="" width="800" height="600">
+`);
+
+instance.show();

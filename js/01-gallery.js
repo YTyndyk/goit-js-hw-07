@@ -5,7 +5,13 @@ const cardMarkup = createGalleryItems(galleryItems);
 
 gelleryRef.addEventListener("click", (e) => {
 	e.preventDefault();
-	console.log("Натиснули на картинку!");
+	if (e.target.nodeName !== "IMG") {
+		return;
+	}
+	const urlImg = e.target.dataset.source;
+	const instance = basicLightbox.create(`
+    <img src="${urlImg}" width="800" height="600">
+`);
 	instance.show();
 });
 
@@ -27,7 +33,3 @@ function createGalleryItems(galleryItems) {
 		.join("");
 }
 gelleryRef.insertAdjacentHTML("beforeend", cardMarkup);
-
-const instance = basicLightbox.create(`
-    <img src="https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg" width="800" height="600">
-`);

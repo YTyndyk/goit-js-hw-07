@@ -3,7 +3,11 @@ import { galleryItems } from "./gallery-items.js";
 const gelleryRef = document.querySelector(".gallery");
 const cardMarkup = createGalleryItems(galleryItems);
 
-gelleryRef.addEventListener("click", (e) => {
+gelleryRef.addEventListener("click", onImgClick);
+
+gelleryRef.insertAdjacentHTML("beforeend", cardMarkup);
+
+function onImgClick(e) {
 	e.preventDefault();
 	if (e.target.nodeName !== "IMG") {
 		return;
@@ -12,8 +16,13 @@ gelleryRef.addEventListener("click", (e) => {
 	const instance = basicLightbox.create(`
     <img src="${urlImg}" width="800" height="600">
 `);
+	document.addEventListener("keydown", (e) => {
+		if (e.code === "Escape") {
+			instance.close();
+		}
+	});
 	instance.show();
-});
+}
 
 function createGalleryItems(galleryItems) {
 	return galleryItems
@@ -32,4 +41,3 @@ function createGalleryItems(galleryItems) {
 		})
 		.join("");
 }
-gelleryRef.insertAdjacentHTML("beforeend", cardMarkup);

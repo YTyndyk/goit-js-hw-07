@@ -12,15 +12,26 @@ function onImgClick(e) {
 	if (e.target.nodeName !== "IMG") {
 		return;
 	}
+
 	const urlImg = e.target.dataset.source;
-	const instance = basicLightbox.create(`
+	const instance = basicLightbox.create(
+		`
     <img src="${urlImg}" width="800" height="600">
-`);
-	document.addEventListener("keydown", (e) => {
+`,
+		{
+			onShow: () => {
+				document.addEventListener("keydown", onKeydownEsc);
+			},
+			onClose: () => {
+				document.removeEventListener("keydown", onKeydownEsc);
+			},
+		},
+	);
+	const onKeydownEsc = (e) => {
 		if (e.code === "Escape") {
 			instance.close();
 		}
-	});
+	};
 	instance.show();
 }
 
